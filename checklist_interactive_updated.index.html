@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Good Citizen Weekly Self-Assessment</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --color-bg: #faf9f7;
+    --color-surface: #f2f0eb;
+    --color-border: #c8c5bc;
+    --color-border-light: #e0ddd6;
+    --color-text: #1a1a18;
+    --color-text-secondary: #6b6860;
+    --color-text-hint: #9e9b94;
+    --color-danger-bg: #fcebeb;
+    --color-danger: #a32d2d;
+    --color-danger-border: #f09595;
+    --color-enemy-bg: #1a0a0a;
+    --color-enemy: #ff3333;
+    --color-enemy-border: #8b0000;
+    --color-warning-bg: #faeeda;
+    --color-warning: #854f0b;
+    --color-info-bg: #e6f1fb;
+    --color-info: #185fa5;
+    --color-success-bg: #eaf3de;
+    --color-success: #3b6d11;
+    --color-pts-pos: #3b6d11;
+    --color-pts-neg: #a32d2d;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: #1c1b19;
+      --color-surface: #252420;
+      --color-border: #3a3832;
+      --color-border-light: #2e2c28;
+      --color-text: #e8e5de;
+      --color-text-secondary: #9e9b94;
+      --color-text-hint: #6b6860;
+      --color-danger-bg: #2a1616;
+      --color-danger: #f09595;
+      --color-danger-border: #a32d2d;
+      --color-enemy-bg: #0d0000;
+      --color-enemy: #ff5555;
+      --color-enemy-border: #8b0000;
+      --color-warning-bg: #2a1f0a;
+      --color-warning: #fac775;
+      --color-info-bg: #0a1a2e;
+      --color-info: #85b7eb;
+      --color-success-bg: #0f1e06;
+      --color-success: #97c459;
+      --color-pts-pos: #97c459;
+      --color-pts-neg: #f09595;
+    }
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .page {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .header {
+    border: 2px solid var(--color-text);
+    padding: 1.25rem 1.5rem 1rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+  }
+
+  .gov-tag {
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+  }
+
+  .form-number {
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    color: var(--color-text-hint);
+  }
+
+  .header h1 {
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.35;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.01em;
+  }
+
+  .header-sub {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: var(--color-text-secondary);
+    border-top: 0.5px solid var(--color-border);
+    padding-top: 0.5rem;
+    margin-top: 0.6rem;
+    line-height: 1.5;
+  }
+
+  .score-bar-wrap {
+    background: var(--color-surface);
+    border: 0.5px solid var(--color-border);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.5rem;
+  }
+
+  .score-label {
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text-secondary);
+  }
+
+  .score-num {
+    font-size: 28px;
+    font-weight: normal;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bar-track {
+    height: 5px;
+    background: var(--color-border-light);
+    margin-bottom: 0.6rem;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    transition: width 0.4s ease, background-color 0.4s ease;
+  }
+
+  .rating-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .rating-tag {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border: 0.5px solid currentColor;
+  }
+
+  .rating-sub {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    font-style: italic;
+    text-align: right;
+  }
+
+  .warning-box {
+    border: 1px solid var(--color-danger-border);
+    background: var(--color-danger-bg);
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--color-danger);
+    line-height: 1.6;
+    display: none;
+  }
+
+  .enemy-box {
+    border: 1px solid var(--color-enemy-border);
+    background: var(--color-enemy-bg);
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.25rem;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--color-enemy);
+    line-height: 1.6;
+    display: none;
+  }
+
+  .section {
+    margin-bottom: 1.75rem;
+  }
+
+  .section-label {
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 0.5px solid var(--color-border);
+  }
+
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 0.65rem 0;
+    border-bottom: 0.5px solid var(--color-border-light);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .item:last-child { border-bottom: none; }
+
+  .item:hover .item-text { color: var(--color-text); }
+
+  .checkbox {
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
+    border: 1.5px solid var(--color-border);
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.1s, border-color 0.1s;
+  }
+
+  .checkbox.checked {
+    background: var(--color-text);
+    border-color: var(--color-text);
+  }
+
+  .checkbox.checked::after {
+    content: '';
+    width: 7px;
+    height: 4px;
+    border-left: 1.5px solid var(--color-bg);
+    border-bottom: 1.5px solid var(--color-bg);
+    transform: rotate(-45deg) translateY(-1px);
+    display: block;
+  }
+
+  .item-text {
+    flex: 1;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-text);
+    transition: color 0.1s;
+  }
+
+  .item-pts {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    font-weight: bold;
+    white-space: nowrap;
+    margin-left: auto;
+    padding-left: 10px;
+    margin-top: 3px;
+  }
+
+  .pts-pos { color: var(--color-pts-pos); }
+  .pts-neg { color: var(--color-pts-neg); }
+
+  .platforms-section { margin-bottom: 1.75rem; }
+
+  .platform-intro {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.6rem;
+    font-style: italic;
+  }
+
+  .platform-row {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+  }
+
+  .platform-tag {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    border: 0.5px solid var(--color-border);
+    padding: 3px 9px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    user-select: none;
+  }
+
+  .platform-tag.active {
+    background: var(--color-text);
+    color: var(--color-bg);
+    border-color: var(--color-text);
+  }
+
+  .divider {
+    border: none;
+    border-top: 0.5px solid var(--color-border);
+    margin: 1.25rem 0;
+  }
+
+  .footer {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: var(--color-text-hint);
+    line-height: 1.7;
+  }
+
+  .footer div + div { margin-top: 0.35rem; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="header-top">
+      <span class="gov-tag">Civic Duty Initiative &bull; Global Harmony Protocol</span>
+      <span class="form-number">Form CDB-001 (Rev. 3)</span>
+    </div>
+    <h1>Good Citizen Weekly Self-Assessment<br>&amp; Community Wellness Checklist</h1>
+    <div class="header-sub">Complete honestly. This form is for personal accountability only. Results are not automatically submitted to any authority. Probably.</div>
+  </div>
+
+  <div class="score-bar-wrap">
+    <div class="score-row">
+      <span class="score-label">Your civic wellness score</span>
+      <span class="score-num" id="scoreNum">0</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" id="barFill" style="width:0%; background-color: var(--color-danger);"></div></div>
+    <div class="rating-row">
+      <span class="rating-tag" id="ratingTag" style="color: var(--color-danger);">Security risk</span>
+      <span class="rating-sub" id="ratingSub">No contributions detected this week.</span>
+    </div>
+  </div>
+
+  <div class="enemy-box" id="enemyBox">
+    ALERT: This score has been automatically escalated to the Bureau of Civic Integrity. A Community Correction Officer has been dispatched to your registered address. Do not leave your home. Do not attempt to contact legal counsel. Legal counsel is not applicable in your case.
+  </div>
+
+  <div class="warning-box" id="warningBox">
+    Your score has triggered an automatic wellness review. Please contact your local Community Harmony Officer or download the SafeSpace app for re-orientation resources.
+  </div>
+
+  <div class="section">
+    <div class="section-label">Part A — Digital Monitoring Contributions</div>
+    <div class="item" onclick="toggle(this)" data-pts="10">
+      <div class="checkbox"></div>
+      <div class="item-text">I reported at least one piece of online content this week using an available platform reporting feature.</div>
+      <span class="item-pts pts-pos">+10 pts</span>
+    </div>
+    <div class="item" onclick="toggle(this)" data-pts="5">
+      <div class="checkbox"></div>
+      <div class="item-text">I reviewed the recent posts of at least three (3) acquaintances for ideological irregularities.</div>
+      <span class="item-pts pts-pos">+5 pts</span>
+    </div>
+    <div class="item" onclick="toggle(this)" data-pts="15">
+      <div class="checkbox"></div>
+      <div class="item-text">I submitted a formal complaint regarding a colleague's digital conduct to the relevant HR or platform authority.</div>
+      <span class="item-pts pts-pos">+15 pts</span>
+    </div>
+    <div class="item" onclick="toggle(this)" data-pts="-20">
+      <div class="checkbox"></div>
+      <div class="item-text">I went more than 48 hours without checking whether anyone in my network had posted anything suspicious.</div>
+      <span class="item-pts pts-neg">&minus;20 pts</span>
+    </div>
+    <div class="item" onclick="toggle(this)" data-pts="-30">
+      <div class="checkbox"></div>
+      <div class="item-text">I actively discouraged someone from reporting a community member, citing "privacy" or "none of my business."</div>
+      <span class="item-pts pts-neg">&minus;30 pts</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Part B — Offline Community Vigilance</div>
+    <div class="item" onclick="toggle(this)" data-pts="10">
+      <div class="checkbox"></div>
+      <div class="item-text">I reported a neighbor's unusual behavior to building management, a community app, or relevant authorities.</div>
+      <span class="item-pts pts-pos">+10 pts</span>
+    </div>
+    <div class="item" onclick="toggle(this)" data-pts="20">
+      <div class="checkbox"></div>
+      <div class="item-text">I informed a supervisor of a coworker's politically or ethically irregular statements made in a private context.</div>
+      <span class="item-pts pts-pos">+20 pts</span>
+    </div>
+    <div class="item" onclick="toggle(this)" data-pts="5">
+      <div class="checkbox"></div>
+      <div class="item-text">I encouraged a family member to participate in a community safety or neighborhood watch initiative.</div>
+      <span class="item-pts pts-pos">+5 pts</span>
+    </div>
+    <div class="item" onclick="toggle(this)" data-pts="-25">
+      <div class="checkbox"></div>
+      <div class="item-text">I kept a sensitive conversation private rather than sharing it with someone in a position of authority.</div>
+      <span class="item-pts pts-neg">&minus;25 pts</span>
+    </div>
+    <div class="item" onclick="toggle(this)" data-pts="-35">
+      <div class="checkbox"></div>
+      <div class="item-text">I used end-to-end encrypted messaging or otherwise took deliberate steps to make my communications unreadable to third parties.</div>
+      <span class="item-pts pts-neg">&minus;35 pts</span>
+    </div>
+  </div>
+
+  <div class="platforms-section">
+    <div class="section-label">Part C — Platforms You Monitor on Behalf of the Community</div>
+    <div class="platform-intro">Check all that you actively monitor for reportable content:</div>
+    <div class="platform-row">
+      <span class="platform-tag" onclick="toggleTag(this)">WeChat</span>
+      <span class="platform-tag" onclick="toggleTag(this)">Instagram</span>
+      <span class="platform-tag" onclick="toggleTag(this)">X / Twitter</span>
+      <span class="platform-tag" onclick="toggleTag(this)">LinkedIn</span>
+      <span class="platform-tag" onclick="toggleTag(this)">TikTok</span>
+      <span class="platform-tag" onclick="toggleTag(this)">Weibo</span>
+      <span class="platform-tag" onclick="toggleTag(this)">WhatsApp groups</span>
+      <span class="platform-tag" onclick="toggleTag(this)">Neighborhood apps</span>
+      <span class="platform-tag" onclick="toggleTag(this)">Family group chats</span>
+      <span class="platform-tag" onclick="toggleTag(this)">Work Slack / Teams</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="footer">
+    <div>This checklist is produced by the Civic Duty Initiative in partnership with the Global Harmony Protocol and an undisclosed number of government agencies, employers, and platform providers.</div>
+    <div>Your participation is voluntary. Your participation is also noted. Have a safe and transparent week.</div>
+  </div>
+</div>
+
+<script>
+  const items = [
+    { pts: 10 }, { pts: 5 }, { pts: 15 }, { pts: -20 }, { pts: -30 },
+    { pts: 10 }, { pts: 20 }, { pts: 5 }, { pts: -25 }, { pts: -35 }
+  ];
+  const checked = new Array(items.length).fill(false);
+
+  const ratings = [
+    { min: -Infinity, max: -55, label: 'Enemy of the state', sub: 'File has been opened. Cooperation is no longer optional.', col: 'var(--color-enemy)', bar: 'var(--color-enemy)', barPct: 2, enemy: true },
+    { min: -54, max: -20, label: 'Security risk', sub: 'Immediate re-orientation recommended.', col: 'var(--color-danger)', bar: 'var(--color-danger)', barPct: 10, warning: true },
+    { min: -19, max: 9,  label: 'Under observation', sub: 'Increased monitoring has been scheduled.', col: 'var(--color-warning)', bar: 'var(--color-warning)', barPct: 25 },
+    { min: 10,  max: 24, label: 'Developing citizen', sub: 'Continue your civic journey.', col: 'var(--color-text-secondary)', bar: 'var(--color-border)', barPct: 45 },
+    { min: 25,  max: 44, label: 'Reliable contributor', sub: 'Your community thanks you.', col: 'var(--color-info)', bar: 'var(--color-info)', barPct: 65 },
+    { min: 45,  max: Infinity, label: 'Model citizen', sub: 'You are an asset to the collective.', col: 'var(--color-pts-pos)', bar: 'var(--color-pts-pos)', barPct: 95 },
+  ];
+
+  function getScore() {
+    return checked.reduce((sum, c, i) => c ? sum + items[i].pts : sum, 0);
+  }
+
+  function updateScore() {
+    const score = getScore();
+    document.getElementById('scoreNum').textContent = (score > 0 ? '+' : '') + score;
+    const r = ratings.find(r => score >= r.min && score <= r.max);
+    document.getElementById('barFill').style.width = r.barPct + '%';
+    document.getElementById('barFill').style.backgroundColor = r.bar;
+    const tag = document.getElementById('ratingTag');
+    tag.textContent = r.label;
+    tag.style.color = r.col;
+    tag.style.borderColor = r.col;
+    document.getElementById('ratingSub').textContent = r.sub;
+    document.getElementById('warningBox').style.display = (r.warning && !r.enemy) ? 'block' : 'none';
+    document.getElementById('enemyBox').style.display = r.enemy ? 'block' : 'none';
+  }
+
+  function toggle(el) {
+    const allItems = document.querySelectorAll('.item[data-pts]');
+    const idx = Array.from(allItems).indexOf(el);
+    checked[idx] = !checked[idx];
+    el.querySelector('.checkbox').classList.toggle('checked', checked[idx]);
+    updateScore();
+  }
+
+  function toggleTag(el) {
+    el.classList.toggle('active');
+  }
+
+  updateScore();
+</script>
+</body>
+</html>
