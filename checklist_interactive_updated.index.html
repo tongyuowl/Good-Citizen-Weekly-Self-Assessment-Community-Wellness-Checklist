@@ -326,6 +326,64 @@
   }
 
   .footer div + div { margin-top: 0.35rem; }
+
+.monitoring-status {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+.status-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9em;
+  margin-bottom: 8px;
+}
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #000;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+#progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff0000, #ff4d4d);
+  box-shadow: 0 0 10px #ff0000;
+  transition: width 0.4s ease;
+}
+.feedback-text {
+  font-size: 0.85em;
+  font-style: italic;
+  color: #888;
+  min-height: 1.2em;
+}
+.platform-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 5px;
+  border: 1px solid #444;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.platform-tag.active {
+  border-color: #ff0000 !important;
+  color: #ff0000 !important;
+  background: rgba(255, 0, 0, 0.1);
+}
+.platform-tag.active::before {
+  content: "●";
+  margin-right: 5px;
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
 </style>
 </head>
 <body>
@@ -373,7 +431,7 @@
     </div>
     <div class="item" onclick="toggle(this)" data-pts="15">
       <div class="checkbox"></div>
-      <div class="item-text">I submitted a formal complaint regarding a colleague's digital conduct to the relevant HR or platform authority.</div>
+      <div class="item-text">I submitted a formal complaint regarding a peer's digital conduct to the relevant university authorities.</div>
       <span class="item-pts pts-pos">+15 pts</span>
     </div>
     <div class="item" onclick="toggle(this)" data-pts="-20">
@@ -392,12 +450,12 @@
     <div class="section-label">Part B — Offline Community Vigilance</div>
     <div class="item" onclick="toggle(this)" data-pts="10">
       <div class="checkbox"></div>
-      <div class="item-text">I reported a neighbor's unusual behavior to building management, a community app, or relevant authorities.</div>
+      <div class="item-text">I reported a neighbor's unusual behavior to a Resident Assistant, a community app, or relevant authorities.</div>
       <span class="item-pts pts-pos">+10 pts</span>
     </div>
     <div class="item" onclick="toggle(this)" data-pts="20">
       <div class="checkbox"></div>
-      <div class="item-text">I informed a supervisor of a coworker's politically or ethically irregular statements made in a private context.</div>
+      <div class="item-text">I informed an authority figure of a peer's politically or ethically irregular statements made in a private context.</div>
       <span class="item-pts pts-pos">+20 pts</span>
     </div>
     <div class="item" onclick="toggle(this)" data-pts="5">
@@ -417,22 +475,34 @@
     </div>
   </div>
 
-  <div class="platforms-section">
-    <div class="section-label">Part C — Platforms You Monitor on Behalf of the Community</div>
-    <div class="platform-intro">Check all that you actively monitor for reportable content:</div>
-    <div class="platform-row">
-      <span class="platform-tag" onclick="toggleTag(this)">WeChat</span>
-      <span class="platform-tag" onclick="toggleTag(this)">Instagram</span>
-      <span class="platform-tag" onclick="toggleTag(this)">X / Twitter</span>
-      <span class="platform-tag" onclick="toggleTag(this)">LinkedIn</span>
-      <span class="platform-tag" onclick="toggleTag(this)">TikTok</span>
-      <span class="platform-tag" onclick="toggleTag(this)">Weibo</span>
-      <span class="platform-tag" onclick="toggleTag(this)">WhatsApp groups</span>
-      <span class="platform-tag" onclick="toggleTag(this)">Neighborhood apps</span>
-      <span class="platform-tag" onclick="toggleTag(this)">Family group chats</span>
-      <span class="platform-tag" onclick="toggleTag(this)">Work Slack / Teams</span>
+<div class="platforms-section">
+  <div class="section-label">Part C — Platforms You Monitor on Behalf of the Community</div>
+  
+  <div class="monitoring-status">
+    <div class="status-header">
+      <span>Surveillance Breadth: <span id="coverage-val">0%</span></span>
+      <span id="threat-level" style="color: #ff4d4d; font-weight: bold;">[ STATUS: INACTIVE ]</span>
     </div>
+    <div class="progress-bar">
+      <div id="progress-fill" style="width: 0%"></div>
+    </div>
+    <div id="platform-feedback" class="feedback-text">Ready to initiate community vigilance...</div>
   </div>
+
+  <div class="platform-intro">Check all that you actively monitor for reportable content:</div>
+  <div class="platform-row">
+    <span class="platform-tag" onclick="updateSurveillance(this)" data-impact="10">WeChat</span>
+    <span class="platform-tag" onclick="updateSurveillance(this)" data-impact="10">Instagram</span>
+    <span class="platform-tag" onclick="updateSurveillance(this)" data-impact="10">X / Twitter</span>
+    <span class="platform-tag" onclick="updateSurveillance(this)" data-impact="10">LinkedIn</span>
+    <span class="platform-tag" onclick="updateSurveillance(this)" data-impact="10">TikTok</span>
+    <span class="platform-tag" onclick="updateSurveillance(this)" data-impact="10">Weibo</span>
+    <span class="platform-tag" onclick="updateSurveillance(this)" data-impact="15" data-special="True loyalty begins at home.">Family group chats</span>
+    <span class="platform-tag" onclick="updateSurveillance(this)" data-impact="12">WhatsApp groups</span>
+    <span class="platform-tag" onclick="updateSurveillance(this)" data-impact="8">Neighborhood apps</span>
+    <span class="platform-tag" onclick="updateSurveillance(this)" data-impact="15">Work Slack / Teams</span>
+  </div>
+</div>
 
   <hr class="divider">
 
@@ -490,6 +560,47 @@
   }
 
   updateScore();
+
+let currentCoverage = 0;
+
+function updateSurveillance(element) {
+    element.classList.toggle('active');
+    const impact = parseInt(element.getAttribute('data-impact'));
+    const isSpecial = element.getAttribute('data-special');
+    const feedback = document.getElementById('platform-feedback');
+    const threatDisplay = document.getElementById('threat-level');
+
+    if (element.classList.contains('active')) {
+        currentCoverage += impact;
+        feedback.innerText = isSpecial ? isSpecial : "Monitoring link established...";
+    } else {
+        currentCoverage -= impact;
+        feedback.innerText = "Connection terminated. Vigilance reduced.";
+    }
+
+    currentCoverage = Math.max(0, Math.min(100, currentCoverage));
+    document.getElementById('coverage-val').innerText = currentCoverage + "%";
+    document.getElementById('progress-fill').style.width = currentCoverage + "%";
+
+    if (currentCoverage === 0) {
+        threatDisplay.innerText = "[ STATUS: INACTIVE ]";
+        threatDisplay.style.color = "#ff4d4d";
+    } else if (currentCoverage < 30) {
+        threatDisplay.innerText = "[ STATUS: NEGLIGENT ]";
+        threatDisplay.style.color = "#ff8c00";
+    } else if (currentCoverage < 70) {
+        threatDisplay.innerText = "[ STATUS: ACTIVE VIGILANCE ]";
+        threatDisplay.style.color = "#ffff00";
+    } else if (currentCoverage < 100) {
+        threatDisplay.innerText = "[ STATUS: MODEL CITIZEN ]";
+        threatDisplay.style.color = "#00ff00";
+    } else {
+        threatDisplay.innerText = "[ STATUS: OMNISCIENT ]";
+        threatDisplay.style.color = "#00ffff";
+        feedback.innerText = "Maximum security achieved. The community is safe in your eyes.";
+    }
+}
+
 </script>
 </body>
 </html>
