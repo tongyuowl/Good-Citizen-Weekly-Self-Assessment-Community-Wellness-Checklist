@@ -1,1 +1,0 @@
-# Good-Citizen-Weekly-Self-Assessment-Community-Wellness-Checklist
