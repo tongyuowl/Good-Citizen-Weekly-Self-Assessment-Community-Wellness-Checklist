@@ -27,24 +27,15 @@
       --color-info: #85b7eb; --color-pts-pos: #97c459; --color-pts-neg: #f09595;
     }
   }
-  body {
-    background: var(--color-bg); color: var(--color-text);
-    font-family: 'Georgia', 'Times New Roman', serif;
-    font-size: 14px; line-height: 1.6; min-height: 100vh;
-    padding: 2rem 1rem; transition: background 0.6s ease;
-  }
+  body { background: var(--color-bg); color: var(--color-text); font-family: 'Georgia', 'Times New Roman', serif; font-size: 14px; line-height: 1.6; min-height: 100vh; padding: 2rem 1rem; transition: background 0.6s ease; }
   body.omniscient { background: #0d0000; color: #e8e5de; }
   .page { max-width: 620px; margin: 0 auto; }
-
   .header { border: 2px solid var(--color-text); padding: 1.25rem 1.5rem 1rem; margin-bottom: 1.75rem; }
   .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
   .gov-tag { font-family: 'Courier New', monospace; font-size: 9px; letter-spacing: 0.14em; color: var(--color-text-secondary); text-transform: uppercase; }
   .form-number { font-family: 'Courier New', monospace; font-size: 9px; color: var(--color-text-hint); }
   .header h1 { font-size: 18px; font-weight: normal; line-height: 1.35; margin-bottom: 0.25rem; }
   .header-sub { font-family: 'Courier New', monospace; font-size: 10px; color: var(--color-text-secondary); border-top: 0.5px solid var(--color-border); padding-top: 0.5rem; margin-top: 0.6rem; line-height: 1.5; }
-
-  .setup-banner { border: 1px solid var(--color-warning); background: var(--color-warning-bg); padding: 0.75rem 1rem; margin-bottom: 1.5rem; font-family: 'Courier New', monospace; font-size: 10px; color: var(--color-warning); line-height: 1.7; }
-
   .score-bar-wrap { background: var(--color-surface); border: 0.5px solid var(--color-border); padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
   .score-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
   .score-label { font-family: 'Courier New', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-text-secondary); }
@@ -54,10 +45,8 @@
   .rating-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
   .rating-tag { font-family: 'Courier New', monospace; font-size: 10px; letter-spacing: 0.08em; padding: 3px 8px; border: 0.5px solid currentColor; }
   .rating-sub { font-size: 11px; color: var(--color-text-secondary); font-style: italic; text-align: right; }
-
   .warning-box { border: 1px solid var(--color-danger-border); background: var(--color-danger-bg); padding: 0.75rem 1rem; margin-bottom: 1.25rem; font-family: 'Courier New', monospace; font-size: 11px; color: var(--color-danger); line-height: 1.6; display: none; }
   .enemy-box { border: 1px solid var(--color-enemy-border); background: var(--color-enemy-bg); padding: 0.75rem 1rem; margin-bottom: 1.25rem; font-family: 'Courier New', monospace; font-size: 11px; color: var(--color-enemy); line-height: 1.6; display: none; }
-
   .section { margin-bottom: 1.75rem; }
   .section-label { font-family: 'Courier New', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: 0.75rem; padding-bottom: 0.4rem; border-bottom: 0.5px solid var(--color-border); }
   .item { display: flex; align-items: flex-start; gap: 12px; padding: 0.65rem 0; border-bottom: 0.5px solid var(--color-border-light); cursor: pointer; user-select: none; }
@@ -68,7 +57,6 @@
   .item-text { flex: 1; font-size: 13px; line-height: 1.55; color: var(--color-text); }
   .item-pts { font-family: 'Courier New', monospace; font-size: 11px; font-weight: bold; white-space: nowrap; margin-left: auto; padding-left: 10px; margin-top: 3px; }
   .pts-pos { color: var(--color-pts-pos); } .pts-neg { color: var(--color-pts-neg); }
-
   .platforms-section { margin-bottom: 1.75rem; }
   .coverage-meter { border: 0.5px solid var(--color-border); background: var(--color-surface); padding: 0.85rem 1rem; margin-bottom: 1rem; }
   .coverage-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.45rem; }
@@ -89,22 +77,16 @@
   .monitor-all-btn { font-family: 'Courier New', monospace; font-size: 10px; letter-spacing: 0.08em; border: 0.5px solid var(--color-danger); color: var(--color-danger); background: transparent; padding: 4px 12px; cursor: pointer; transition: background 0.15s, color 0.15s; }
   .monitor-all-btn:hover { background: var(--color-danger); color: var(--color-bg); }
   .monitor-all-hint { font-size: 10px; color: var(--color-text-hint); font-style: italic; }
-
   .omniscient-overlay { display:none; position:fixed; inset:0; align-items:center; justify-content:center; pointer-events:none; z-index:0; opacity:0; transition:opacity 1s ease; }
   .omniscient-overlay.visible { display:flex; opacity:1; }
   .eye-svg { width:min(60vw,360px); height:auto; opacity:0.06; }
-
   .divider { border:none; border-top:0.5px solid var(--color-border); margin:1.25rem 0; }
-
-  /* SUBMIT */
   .submit-section { margin-bottom: 1.75rem; }
   .submit-btn { font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 0.1em; border: 1.5px solid var(--color-text); color: var(--color-text); background: transparent; padding: 8px 20px; cursor: pointer; transition: background 0.15s, color 0.15s; display: block; width: 100%; text-align: center; }
   .submit-btn:hover { background: var(--color-text); color: var(--color-bg); }
   .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
   .submit-status { font-family: 'Courier New', monospace; font-size: 10px; color: var(--color-text-secondary); text-align: center; margin-top: 0.5rem; min-height: 1.4em; font-style: italic; }
   .submit-note { font-size: 10px; color: var(--color-text-hint); text-align: center; margin-top: 0.4rem; font-style: italic; }
-
-  /* AGGREGATE */
   .aggregate-section { border: 0.5px solid var(--color-border); background: var(--color-surface); padding: 1.25rem; margin-bottom: 1.75rem; }
   .agg-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 0.5px solid var(--color-border); gap: 8px; }
   .agg-title { font-family: 'Courier New', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-text-secondary); }
@@ -124,7 +106,6 @@
   .platform-list-fill { height: 100%; background: var(--color-text-secondary); transition: width 0.5s ease; }
   .dist-pct, .platform-list-pct { width: 28px; text-align: right; color: var(--color-text-hint); }
   .agg-empty, .agg-loading { font-family: 'Courier New', monospace; font-size: 10px; color: var(--color-text-hint); font-style: italic; text-align: center; padding: 1rem 0; }
-
   .footer { font-family: 'Courier New', monospace; font-size: 10px; color: var(--color-text-hint); line-height: 1.7; }
   .footer div + div { margin-top: 0.35rem; }
 </style>
@@ -150,10 +131,6 @@
     </div>
     <h1>Good Citizen Weekly Self-Assessment<br>&amp; Community Wellness Checklist</h1>
     <div class="header-sub">Complete honestly. This form is for personal accountability only. Results are not automatically submitted to any authority. Probably.</div>
-  </div>
-
-  <div class="setup-banner" id="setupBanner" style="display:none">
-    ⚠ Data collection not yet configured. Follow the setup instructions in the HTML comments to connect Google Sheets. Submissions will not be saved until setup is complete.
   </div>
 
   <div class="score-bar-wrap">
@@ -231,7 +208,7 @@
     <div class="agg-header">
       <span class="agg-title">Collective Wellness Report</span>
       <span class="agg-count" id="aggCount"></span>
-      <button class="agg-refresh" onclick="loadAggregate()">↺ refresh</button>
+      <button class="agg-refresh" onclick="loadAggregate()">&#8634; refresh</button>
     </div>
     <div id="aggBody"><div class="agg-loading">Loading collective data...</div></div>
   </div>
@@ -244,15 +221,8 @@
 </div>
 
 <script>
-// ─────────────────────────────────────────────────────────────
-// STEP 4: Replace this with your Google Apps Script Web App URL
-// (see setup instructions in the HTML comments at the bottom)
-// ─────────────────────────────────────────────────────────────
-const SCRIPT_URL = ‘https://script.google.com/macros/s/AKfycbxvJnEPmetSE51xwOk5Tt9FTFnMRTmxkMmvLN7DMWrq1veMqkAYeAZytUcPsigo-onS/exec’;
-const CONFIGURED = SCRIPT_URL !== ‘https://script.google.com/macros/s/AKfycbxvJnEPmetSE51xwOk5Tt9FTFnMRTmxkMmvLN7DMWrq1veMqkAYeAZytUcPsigo-onS/exec’;
-if (!CONFIGURED) document.getElementById('setupBanner').style.display = 'block';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxvJnEPmetSE51xwOk5Tt9FTFnMRTmxkMmvLN7DMWrq1veMqkAYeAZytUcPsigo-onS/exec';
 
-// ── SCORE LOGIC ───────────────────────────────────────────────
 const itemDefs = [
   {pts:10},{pts:5},{pts:15},{pts:-20},{pts:-30},
   {pts:10},{pts:20},{pts:5},{pts:-25},{pts:-35}
@@ -260,12 +230,12 @@ const itemDefs = [
 const checked = new Array(itemDefs.length).fill(false);
 
 const ratings = [
-  {min:-Infinity,max:-55,label:'Enemy of the State',  sub:'File has been opened. Cooperation is no longer optional.',  col:'var(--color-enemy)',         bar:'var(--color-enemy)',   pct:2,  enemy:true},
-  {min:-54,max:-20,      label:'Security Risk',        sub:'Immediate re-orientation recommended.',                     col:'var(--color-danger)',        bar:'var(--color-danger)',  pct:10, warning:true},
-  {min:-19,max:9,        label:'Under Observation',    sub:'Increased monitoring has been scheduled.',                  col:'var(--color-warning)',       bar:'var(--color-warning)', pct:28},
-  {min:10, max:24,       label:'Developing Citizen',   sub:'Continue your civic journey.',                              col:'var(--color-text-secondary)',bar:'var(--color-border)',  pct:48},
-  {min:25, max:44,       label:'Reliable Contributor', sub:'Your community thanks you.',                                col:'var(--color-info)',          bar:'var(--color-info)',    pct:68},
-  {min:45, max:Infinity, label:'Model Citizen',        sub:'You are an asset to the collective.',                       col:'var(--color-pts-pos)',       bar:'var(--color-pts-pos)', pct:95},
+  {min:-Infinity,max:-55,label:'Enemy of the State',  sub:'File has been opened. Cooperation is no longer optional.',col:'var(--color-enemy)',         bar:'var(--color-enemy)',   pct:2,  enemy:true},
+  {min:-54,max:-20,      label:'Security Risk',        sub:'Immediate re-orientation recommended.',                  col:'var(--color-danger)',        bar:'var(--color-danger)',  pct:10, warning:true},
+  {min:-19,max:9,        label:'Under Observation',    sub:'Increased monitoring has been scheduled.',               col:'var(--color-warning)',       bar:'var(--color-warning)', pct:28},
+  {min:10, max:24,       label:'Developing Citizen',   sub:'Continue your civic journey.',                           col:'var(--color-text-secondary)',bar:'var(--color-border)',  pct:48},
+  {min:25, max:44,       label:'Reliable Contributor', sub:'Your community thanks you.',                             col:'var(--color-info)',          bar:'var(--color-info)',    pct:68},
+  {min:45, max:Infinity, label:'Model Citizen',        sub:'You are an asset to the collective.',                    col:'var(--color-pts-pos)',       bar:'var(--color-pts-pos)', pct:95},
 ];
 
 const getScore = () => checked.reduce((s,c,i) => c ? s+itemDefs[i].pts : s, 0);
@@ -292,16 +262,15 @@ function toggle(el) {
   updateScore();
 }
 
-// ── PLATFORM LOGIC ────────────────────────────────────────────
 const platforms = document.querySelectorAll('.platform-tag');
 const totalWeight = Array.from(platforms).reduce((s,p) => s+parseInt(p.dataset.weight), 0);
 
 const coverageStates = [
-  {threshold:0,   label:'Inactive',        reach:'No platforms monitored. Community is exposed.',                        col:'var(--color-text-hint)',  bar:'var(--color-text-hint)'},
-  {threshold:15,  label:'Negligent',        reach:'Your Surveillance Reach: {pct}% — Insufficient.',                     col:'var(--color-warning)',    bar:'var(--color-warning)'},
-  {threshold:40,  label:'Active Vigilance', reach:'Your Surveillance Reach: {pct}% — Developing.',                       col:'var(--color-info)',       bar:'var(--color-info)'},
-  {threshold:65,  label:'Comprehensive',    reach:'Your Surveillance Reach: {pct}% — Comprehensive. Noted.',             col:'var(--color-pts-pos)',    bar:'var(--color-pts-pos)'},
-  {threshold:100, label:'Omniscient',       reach:'Your Surveillance Reach: 100% — Maximum security achieved. The community is safe in your eyes.', col:'var(--color-danger)', bar:'var(--color-danger)'},
+  {threshold:0,   label:'Inactive',        reach:'No platforms monitored. Community is exposed.',                                                            col:'var(--color-text-hint)', bar:'var(--color-text-hint)'},
+  {threshold:15,  label:'Negligent',        reach:'Your Surveillance Reach: {pct}% — Insufficient.',                                                          col:'var(--color-warning)',   bar:'var(--color-warning)'},
+  {threshold:40,  label:'Active Vigilance', reach:'Your Surveillance Reach: {pct}% — Developing.',                                                            col:'var(--color-info)',      bar:'var(--color-info)'},
+  {threshold:65,  label:'Comprehensive',    reach:'Your Surveillance Reach: {pct}% — Comprehensive. Noted.',                                                   col:'var(--color-pts-pos)',   bar:'var(--color-pts-pos)'},
+  {threshold:100, label:'Omniscient',       reach:'Your Surveillance Reach: 100% — Maximum security achieved. The community is safe in your eyes.',            col:'var(--color-danger)',    bar:'var(--color-danger)'},
 ];
 
 let noteTimeout = null;
@@ -346,13 +315,12 @@ function monitorAll() {
   showNote('Radical transparency achieved. All channels open. You are the network.');
 }
 
-// ── SUBMIT ────────────────────────────────────────────────────
 let hasSubmitted = false;
 
 function getActivePlatformNames() {
   return Array.from(platforms)
     .filter(p => p.classList.contains('active'))
-    .map(p => p.textContent.replace(/^[\s●]+/, '').trim());
+    .map(p => p.textContent.replace(/^[\s\u25cf]+/, '').trim());
 }
 
 function submitResult() {
@@ -367,15 +335,10 @@ function submitResult() {
     platforms: getActivePlatformNames().join(', '),
     timestamp: new Date().toISOString(),
   };
-
   const btn = document.getElementById('submitBtn');
   const status = document.getElementById('submitStatus');
-
-  if (!CONFIGURED) { status.textContent = 'Setup required — see instructions.'; return; }
-
   btn.disabled = true;
   status.textContent = 'Transmitting to the collective record...';
-
   fetch(SCRIPT_URL, {
     method: 'POST', mode: 'no-cors',
     headers: {'Content-Type': 'application/json'},
@@ -393,7 +356,6 @@ function submitResult() {
   });
 }
 
-// ── AGGREGATE ─────────────────────────────────────────────────
 const ratingColors = {
   'Enemy of the State':'#a32d2d','Security Risk':'#c44040',
   'Under Observation':'#854f0b','Developing Citizen':'#9e9b94',
@@ -414,109 +376,41 @@ function renderAggregate(data) {
   const distRows = ratingOrder.map(name => {
     const count = data.ratingCounts[name] || 0;
     const pct = data.total > 0 ? Math.round((count/data.total)*100) : 0;
-    return `<div class="dist-row"><span class="dist-name">${name}</span><div class="dist-track"><div class="dist-fill" style="width:${pct}%;background:${ratingColors[name]||'#9e9b94'}"></div></div><span class="dist-pct">${pct}%</span></div>`;
+    return '<div class="dist-row"><span class="dist-name">'+name+'</span><div class="dist-track"><div class="dist-fill" style="width:'+pct+'%;background:'+(ratingColors[name]||'#9e9b94')+'"></div></div><span class="dist-pct">'+pct+'%</span></div>';
   }).join('');
   const platEntries = Object.entries(data.platformCounts||{}).sort((a,b)=>b[1]-a[1]);
   const maxPlat = platEntries.length > 0 ? platEntries[0][1] : 1;
-  const platRows = platEntries.map(([name,count]) => {
+  const platRows = platEntries.map(function(entry) {
+    const name = entry[0], count = entry[1];
     const pct = Math.round((count/data.total)*100);
     const barW = Math.round((count/maxPlat)*100);
-    return `<div class="platform-list-row"><span class="platform-list-name">${name}</span><div class="platform-list-track"><div class="platform-list-fill" style="width:${barW}%"></div></div><span class="platform-list-pct">${pct}%</span></div>`;
+    return '<div class="platform-list-row"><span class="platform-list-name">'+name+'</span><div class="platform-list-track"><div class="platform-list-fill" style="width:'+barW+'%"></div></div><span class="platform-list-pct">'+pct+'%</span></div>';
   }).join('');
   const topRatingWord = (data.mostCommonRating||'—').split(' ')[0];
-  body.innerHTML = `
-    <div class="agg-stat-row">
-      <div class="agg-stat"><div class="agg-stat-num">${avgSign}${data.avgScore}</div><div class="agg-stat-label">Avg. Score</div></div>
-      <div class="agg-stat"><div class="agg-stat-num">${data.avgCoverage}%</div><div class="agg-stat-label">Avg. Coverage</div></div>
-      <div class="agg-stat"><div class="agg-stat-num">${topRatingWord}</div><div class="agg-stat-label">Most Common</div></div>
-    </div>
-    <div class="agg-sub-label">Rating Distribution</div>
-    <div class="rating-dist">${distRows}</div>
-    ${platRows ? `<div class="agg-sub-label">Most Monitored Platforms</div><div class="platform-list">${platRows}</div>` : ''}`;
+  body.innerHTML =
+    '<div class="agg-stat-row">' +
+      '<div class="agg-stat"><div class="agg-stat-num">'+avgSign+data.avgScore+'</div><div class="agg-stat-label">Avg. Score</div></div>' +
+      '<div class="agg-stat"><div class="agg-stat-num">'+data.avgCoverage+'%</div><div class="agg-stat-label">Avg. Coverage</div></div>' +
+      '<div class="agg-stat"><div class="agg-stat-num">'+topRatingWord+'</div><div class="agg-stat-label">Most Common</div></div>' +
+    '</div>' +
+    '<div class="agg-sub-label">Rating Distribution</div>' +
+    '<div class="rating-dist">'+distRows+'</div>' +
+    (platRows ? '<div class="agg-sub-label">Most Monitored Platforms</div><div class="platform-list">'+platRows+'</div>' : '');
 }
 
 function loadAggregate() {
-  if (!CONFIGURED) { renderAggregate(null); return; }
   document.getElementById('aggBody').innerHTML = '<div class="agg-loading">Loading collective data...</div>';
   fetch(SCRIPT_URL + '?action=get', {mode:'cors'})
-    .then(r => r.json())
-    .then(data => renderAggregate(data))
-    .catch(() => {
+    .then(function(r){ return r.json(); })
+    .then(function(data){ renderAggregate(data); })
+    .catch(function(){
       document.getElementById('aggBody').innerHTML = '<div class="agg-empty">Could not load collective data.</div>';
     });
 }
 
-updateScore(); updateCoverage(); loadAggregate();
+updateScore();
+updateCoverage();
+loadAggregate();
 </script>
-
-<!--
-════════════════════════════════════════════════════════════════
-SETUP INSTRUCTIONS — connect Google Sheets in 4 steps
-════════════════════════════════════════════════════════════════
-
-STEP 1: Create a Google Sheet
-  · Go to sheets.google.com, create a new spreadsheet
-  · Rename the first sheet tab to: Responses
-  · In row 1, put these headers: Timestamp | Score | Rating | Coverage | Platforms
-
-STEP 2: Open Apps Script
-  · In your Sheet: Extensions → Apps Script
-  · Delete all existing code, paste this entire block:
-
-─────────────────── PASTE THIS ───────────────────
-const SHEET_NAME = 'Responses';
-
-function doPost(e) {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
-  const data = JSON.parse(e.postData.contents);
-  sheet.appendRow([data.timestamp, data.score, data.rating, data.coverage, data.platforms]);
-  return ContentService
-    .createTextOutput(JSON.stringify({status:'ok'}))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-function doGet(e) {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
-  const rows = sheet.getDataRange().getValues();
-  if (rows.length <= 1) {
-    return ContentService
-      .createTextOutput(JSON.stringify({total:0}))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-  const data = rows.slice(1);
-  const total = data.length;
-  const avgScore = Math.round(data.reduce((s,r) => s + Number(r[1]), 0) / total);
-  const avgCoverage = Math.round(data.reduce((s,r) => s + Number(r[3]), 0) / total);
-  const ratingCounts = {}, platformCounts = {};
-  data.forEach(row => {
-    const rating = row[2];
-    ratingCounts[rating] = (ratingCounts[rating] || 0) + 1;
-    String(row[4]).split(',').map(p => p.trim()).filter(Boolean).forEach(p => {
-      platformCounts[p] = (platformCounts[p] || 0) + 1;
-    });
-  });
-  const mostCommonRating = Object.entries(ratingCounts).sort((a,b) => b[1]-a[1])[0]?.[0] || '';
-  return ContentService
-    .createTextOutput(JSON.stringify({total, avgScore, avgCoverage, ratingCounts, platformCounts, mostCommonRating}))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-──────────────────── END PASTE ───────────────────
-
-STEP 3: Deploy
-  · Click Deploy → New deployment
-  · Type: Web app
-  · Execute as: Me
-  · Who has access: Anyone
-  · Click Deploy → authorize → copy the Web App URL
-
-STEP 4: Paste URL into this file
-  · Find this line near the top of <script>:
-      const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
-  · Replace the placeholder with your URL (keep the quotes)
-  · Save the file, re-upload to GitHub
-  · Done — submissions now save to your Sheet
-
-════════════════════════════════════════════════════════════════
--->
 </body>
 </html>
