@@ -123,7 +123,6 @@
 </div>
 
 <div class="page">
-
   <div class="header">
     <div class="header-top">
       <span class="gov-tag">Civic Duty Initiative &bull; Global Harmony Protocol</span>
@@ -217,11 +216,10 @@
     <div>This checklist is produced by the Civic Duty Initiative in partnership with the Global Harmony Protocol and an undisclosed number of government agencies, employers, and platform providers.</div>
     <div>Your participation is voluntary. Your participation is also noted. Have a safe and transparent week.</div>
   </div>
-
 </div>
 
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJD-xT8c3OVRYfg20JPPp63EFnlilAO5_L56eBbL87VDm08_W9NBQiTuYrlTDYFKPQ/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxvJnEPmetSE51xwOk5Tt9FTFnMRTmxkMmvLN7DMWrq1veMqkAYeAZytUcPsigo-onS/exec';
 
 const itemDefs = [
   {pts:10},{pts:5},{pts:15},{pts:-20},{pts:-30},
@@ -245,8 +243,8 @@ function updateScore() {
   const score = getScore();
   document.getElementById('scoreNum').textContent = (score>0?'+':'') + score;
   const r = getRating(score);
-  const fill = document.getElementById('barFill');
-  fill.style.width = r.pct+'%'; fill.style.backgroundColor = r.bar;
+  document.getElementById('barFill').style.width = r.pct+'%';
+  document.getElementById('barFill').style.backgroundColor = r.bar;
   const tag = document.getElementById('ratingTag');
   tag.textContent = r.label; tag.style.color = r.col; tag.style.borderColor = r.col;
   document.getElementById('ratingSub').textContent = r.sub;
@@ -266,11 +264,11 @@ const platforms = document.querySelectorAll('.platform-tag');
 const totalWeight = Array.from(platforms).reduce((s,p) => s+parseInt(p.dataset.weight), 0);
 
 const coverageStates = [
-  {threshold:0,   label:'Inactive',        reach:'No platforms monitored. Community is exposed.',                                                            col:'var(--color-text-hint)', bar:'var(--color-text-hint)'},
-  {threshold:15,  label:'Negligent',        reach:'Your Surveillance Reach: {pct}% — Insufficient.',                                                          col:'var(--color-warning)',   bar:'var(--color-warning)'},
-  {threshold:40,  label:'Active Vigilance', reach:'Your Surveillance Reach: {pct}% — Developing.',                                                            col:'var(--color-info)',      bar:'var(--color-info)'},
-  {threshold:65,  label:'Comprehensive',    reach:'Your Surveillance Reach: {pct}% — Comprehensive. Noted.',                                                   col:'var(--color-pts-pos)',   bar:'var(--color-pts-pos)'},
-  {threshold:100, label:'Omniscient',       reach:'Your Surveillance Reach: 100% — Maximum security achieved. The community is safe in your eyes.',            col:'var(--color-danger)',    bar:'var(--color-danger)'},
+  {threshold:0,   label:'Inactive',        reach:'No platforms monitored. Community is exposed.',                                                 col:'var(--color-text-hint)', bar:'var(--color-text-hint)'},
+  {threshold:15,  label:'Negligent',        reach:'Your Surveillance Reach: {pct}% — Insufficient.',                                               col:'var(--color-warning)',   bar:'var(--color-warning)'},
+  {threshold:40,  label:'Active Vigilance', reach:'Your Surveillance Reach: {pct}% — Developing.',                                                 col:'var(--color-info)',      bar:'var(--color-info)'},
+  {threshold:65,  label:'Comprehensive',    reach:'Your Surveillance Reach: {pct}% — Comprehensive. Noted.',                                        col:'var(--color-pts-pos)',   bar:'var(--color-pts-pos)'},
+  {threshold:100, label:'Omniscient',       reach:'Your Surveillance Reach: 100% — Maximum security achieved. The community is safe in your eyes.', col:'var(--color-danger)',    bar:'var(--color-danger)'},
 ];
 
 let noteTimeout = null;
@@ -281,8 +279,8 @@ function updateCoverage() {
   const weight = active.reduce((s,p) => s+parseInt(p.dataset.weight), 0);
   const pct = Math.round((weight/totalWeight)*100);
   const state = getCoverageState(pct);
-  const fill = document.getElementById('coverageFill');
-  fill.style.width = pct+'%'; fill.style.backgroundColor = state.bar;
+  document.getElementById('coverageFill').style.width = pct+'%';
+  document.getElementById('coverageFill').style.backgroundColor = state.bar;
   const statusEl = document.getElementById('coverageStatus');
   statusEl.textContent = state.label; statusEl.style.color = state.col; statusEl.style.borderColor = state.col;
   const reachEl = document.getElementById('coverageReach');
@@ -325,13 +323,18 @@ function getActivePlatformNames() {
 
 function submitResult() {
   if (hasSubmitted) return;
-
   const score = getScore();
   const r = getRating(score);
   const active = Array.from(platforms).filter(p => p.classList.contains('active'));
   const weight = active.reduce((s,p) => s+parseInt(p.dataset.weight), 0);
   const coveragePct = Math.round((weight/totalWeight)*100);
 
+  const btn = document.getElementById('submitBtn');
+  const status = document.getElementById('submitStatus');
+  btn.disabled = true;
+  status.textContent = 'Transmitting to the collective record...';
+
+  // Build URL with query params — avoids no-cors POST body problem
   const params = new URLSearchParams({
     action: 'submit',
     score: score,
@@ -341,15 +344,21 @@ function submitResult() {
     timestamp: new Date().toISOString()
   });
 
-  fetch(SCRIPT_URL + '?' + params.toString())
-    .then(r => r.json())
-    .then(() => {
-      hasSubmitted = true;
-      document.getElementById('submitStatus').textContent = 'Recorded.';
-      setTimeout(loadAggregate, 1000);
+  fetch(SCRIPT_URL + '?' + params.toString(), { method: 'GET', mode: 'cors' })
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === 'ok') {
+        hasSubmitted = true;
+        status.textContent = 'Recorded. Your contribution has been noted.';
+        btn.textContent = '[ Assessment Submitted ]';
+        setTimeout(loadAggregate, 1000);
+      } else {
+        throw new Error('bad response');
+      }
     })
     .catch(() => {
-      document.getElementById('submitStatus').textContent = 'Failed.';
+      btn.disabled = false;
+      status.textContent = 'Transmission failed. The network is watching, but not listening right now.';
     });
 }
 
