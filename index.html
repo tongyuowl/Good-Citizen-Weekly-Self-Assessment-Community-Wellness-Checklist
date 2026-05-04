@@ -325,35 +325,32 @@ function getActivePlatformNames() {
 
 function submitResult() {
   if (hasSubmitted) return;
+
   const score = getScore();
   const r = getRating(score);
   const active = Array.from(platforms).filter(p => p.classList.contains('active'));
   const weight = active.reduce((s,p) => s+parseInt(p.dataset.weight), 0);
   const coveragePct = Math.round((weight/totalWeight)*100);
-  const payload = {
-    score, rating: r.label, coverage: coveragePct,
+
+  const params = new URLSearchParams({
+    action: 'submit',
+    score: score,
+    rating: r.label,
+    coverage: coveragePct,
     platforms: getActivePlatformNames().join(', '),
-    timestamp: new Date().toISOString(),
-  };
-  const btn = document.getElementById('submitBtn');
-  const status = document.getElementById('submitStatus');
-  btn.disabled = true;
-  status.textContent = 'Transmitting to the collective record...';
-  fetch(SCRIPT_URL, {
-    method: 'POST', mode: 'no-cors',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(payload),
-  })
-  .then(() => {
-    hasSubmitted = true;
-    status.textContent = 'Recorded. Your contribution has been noted.';
-    btn.textContent = '[ Assessment Submitted ]';
-    setTimeout(loadAggregate, 1500);
-  })
-  .catch(() => {
-    btn.disabled = false;
-    status.textContent = 'Transmission failed. The network is watching, but not listening right now.';
+    timestamp: new Date().toISOString()
   });
+
+  fetch(SCRIPT_URL + '?' + params.toString())
+    .then(r => r.json())
+    .then(() => {
+      hasSubmitted = true;
+      document.getElementById('submitStatus').textContent = 'Recorded.';
+      setTimeout(loadAggregate, 1000);
+    })
+    .catch(() => {
+      document.getElementById('submitStatus').textContent = 'Failed.';
+    });
 }
 
 const ratingColors = {
